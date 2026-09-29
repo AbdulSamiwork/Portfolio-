@@ -25,7 +25,10 @@ export default function Skills() {
     { id: 'tools', label: 'Cloud, DevOps & Tools', icon: <Cloud size={16} />, glow: 'cyan' },
   ];
 
-  const activeSkills = skillsList.filter((s) => s.category === activeCategory);
+  const activeSkills = skillsList.filter((s) => {
+    const cat = (s.category || 'web').toLowerCase().trim();
+    return cat === activeCategory;
+  });
   const activeConfig = categories.find((c) => c.id === activeCategory);
 
   const gradientMap = {
@@ -99,7 +102,12 @@ export default function Skills() {
         </div>
 
         {/* Enhanced Skill Cards Grid with Color-Matched Animated Hover */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+        {activeSkills.length === 0 ? (
+          <div className="text-center py-10 px-4 rounded-2xl border border-dashed border-white/10 bg-white/[0.02]">
+            <p className="text-slate-400 text-sm m-0">No competencies registered in this domain yet.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {activeSkills.map((skill, sIdx) => {
             const levelPercent =
               skill.level === 'Expert'
@@ -150,6 +158,7 @@ export default function Skills() {
             );
           })}
         </div>
+        )}
       </div>
     </section>
   );

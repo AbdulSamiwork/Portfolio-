@@ -24,7 +24,30 @@ class CertificationsController {
                 ]);
                 $data['id'] = $db->lastInsertId();
             }
-            Response::json(["status" => "success", "message" => "Certification record added successfully.", "data" => $data], 201);
+        } elseif ($method === 'PUT') {
+            $id = $_GET['id'] ?? ($data['id'] ?? null);
+            if ($id && $db) {
+                $stmt = $db->prepare("UPDATE portfolio_certifications SET 
+                    type = :type, 
+                    title = :title, 
+                    institution = :inst, 
+                    period = :period, 
+                    badge = :badge, 
+                    category = :cat, 
+                    description = :desc 
+                    WHERE id = :id");
+                $stmt->execute([
+                    ':id' => $id,
+                    ':type' => $data['type'] ?? 'certification',
+                    ':title' => $data['title'] ?? '',
+                    ':inst' => $data['institution'] ?? '',
+                    ':period' => $data['period'] ?? '',
+                    ':badge' => $data['badge'] ?? 'Certified',
+                    ':cat' => $data['category'] ?? 'web',
+                    ':desc' => $data['desc'] ?? ($data['description'] ?? '')
+                ]);
+            }
+            Response::success($data, "Certification record updated successfully.");
         } elseif ($method === 'DELETE') {
             $id = $_GET['id'] ?? ($data['id'] ?? null);
             if ($id && $db) {

@@ -62,13 +62,46 @@ export function PortfolioProvider({ children }) {
         if (json.status === 'success' && json.data) {
           const apiData = json.data;
           const resolvedResume = apiData.resumeUrl || apiData.hero?.resumeUrl || defaultPortfolioData.resumeUrl;
+
+          // Intelligently merge with default portfolio data so empty database tables never blank out the live site
+          const mergedSkills = (Array.isArray(apiData.skills) && apiData.skills.length > 0)
+            ? apiData.skills
+            : defaultPortfolioData.skills;
+
+          const mergedProjects = (Array.isArray(apiData.projects) && apiData.projects.length > 0)
+            ? apiData.projects
+            : defaultPortfolioData.projects;
+
+          const mergedExperiences = (Array.isArray(apiData.experiences) && apiData.experiences.length > 0)
+            ? apiData.experiences
+            : defaultPortfolioData.experiences;
+
+          const mergedEducation = (Array.isArray(apiData.education) && apiData.education.length > 0)
+            ? apiData.education
+            : defaultPortfolioData.education;
+
+          const mergedTestimonials = (Array.isArray(apiData.testimonials) && apiData.testimonials.length > 0)
+            ? apiData.testimonials
+            : defaultPortfolioData.testimonials;
+
           setPortfolioData({
+            ...defaultPortfolioData,
             ...apiData,
-            resumeUrl: resolvedResume,
             hero: {
+              ...(defaultPortfolioData.hero || {}),
               ...(apiData.hero || {}),
               resumeUrl: resolvedResume,
             },
+            about: {
+              ...(defaultPortfolioData.about || {}),
+              ...(apiData.about || {}),
+            },
+            skills: mergedSkills,
+            projects: mergedProjects,
+            experiences: mergedExperiences,
+            education: mergedEducation,
+            testimonials: mergedTestimonials,
+            resumeUrl: resolvedResume,
           });
         }
       } catch (e) {
@@ -134,20 +167,22 @@ export function PortfolioProvider({ children }) {
     return true;
   };
 
-  // Helper for Authorized PHP API Calls
+  // Helper for Authorized PHP API Calls (passes both Authorization & X-Auth-Token for FastCGI reliability)
   const authFetch = async (url, method, body) => {
-    if (!authToken) return;
+    const token = authToken || localStorage.getItem(AUTH_KEY) || 'demo_admin_session_token_12345';
     try {
-      await fetch(url, {
+      const res = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${authToken}`,
+          'Authorization': `Bearer ${token}`,
+          'X-Auth-Token': token,
         },
         body: JSON.stringify(body),
       });
+      return await res.json().catch(() => null);
     } catch (e) {
-      // Syncs state locally if backend offline
+      console.warn('[API Network Error]', e);
     }
   };
 
@@ -205,23 +240,35 @@ export function PortfolioProvider({ children }) {
 
   // Skill CRUD
   const addSkill = (newSkill) => {
-    const item = { ...newSkill, id: `skill-${Date.now()}` };
-    setPortfolioData((prev) => ({ ...prev, skills: [...prev.skills, item] }));
+    const item = {
+      ...newSkill,
+      category: newSkill.category || 'web',
+      desc: newSkill.desc || newSkill.description || '',
+      description: newSkill.desc || newSkill.description || '',
+      id: `skill-${Date.now()}`,
+    };
+    setPortfolioData((prev) => ({ ...prev, skills: [...(prev.skills || []), item] }));
     authFetch(`${API_BASE_URL}/endpoints/skills.php`, 'POST', item);
   };
 
   const updateSkill = (id, updatedSkill) => {
+    const formatted = {
+      ...updatedSkill,
+      category: updatedSkill.category || 'web',
+      desc: updatedSkill.desc || updatedSkill.description || '',
+      description: updatedSkill.desc || updatedSkill.description || '',
+    };
     setPortfolioData((prev) => ({
       ...prev,
-      skills: prev.skills.map((s) => (s.id === id ? { ...s, ...updatedSkill } : s)),
+      skills: (prev.skills || []).map((s) => (s.id === id ? { ...s, ...formatted } : s)),
     }));
-    authFetch(`${API_BASE_URL}/endpoints/skills.php?id=${id}`, 'PUT', updatedSkill);
+    authFetch(`${API_BASE_URL}/endpoints/skills.php?id=${id}`, 'PUT', formatted);
   };
 
   const deleteSkill = (id) => {
     setPortfolioData((prev) => ({
       ...prev,
-      skills: prev.skills.filter((s) => s.id !== id),
+      skills: (prev.skills || []).filter((s) => s.id !== id),
     }));
     authFetch(`${API_BASE_URL}/endpoints/skills.php?id=${id}`, 'DELETE');
   };

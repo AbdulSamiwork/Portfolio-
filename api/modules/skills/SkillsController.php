@@ -17,11 +17,24 @@ class SkillsController {
                     ':cat' => $data['category'] ?? 'web',
                     ':name' => $data['name'] ?? '',
                     ':level' => $data['level'] ?? 'Intermediate',
-                    ':desc' => $data['desc'] ?? ''
+                    ':desc' => $data['desc'] ?? ($data['description'] ?? '')
                 ]);
                 $data['id'] = $db->lastInsertId();
             }
             Response::json(["status" => "success", "message" => "Skill added successfully.", "data" => $data], 201);
+        } elseif ($method === 'PUT') {
+            $id = $_GET['id'] ?? ($data['id'] ?? null);
+            if ($id && $db) {
+                $stmt = $db->prepare("UPDATE portfolio_skills SET category = :cat, name = :name, level = :level, description = :desc WHERE id = :id");
+                $stmt->execute([
+                    ':id' => $id,
+                    ':cat' => $data['category'] ?? 'web',
+                    ':name' => $data['name'] ?? '',
+                    ':level' => $data['level'] ?? 'Intermediate',
+                    ':desc' => $data['desc'] ?? ($data['description'] ?? '')
+                ]);
+            }
+            Response::success($data, "Skill updated successfully.");
         } elseif ($method === 'DELETE') {
             $id = $_GET['id'] ?? ($data['id'] ?? null);
             if ($id && $db) {

@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `portfolio_hero` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `portfolio_hero` (`id`, `name`, `title_tag`, `headline`, `bio`, `profile_image`, `metric1_value`, `metric1_label`, `metric2_value`, `metric2_label`, `metric3_value`, `metric3_label`, `email`, `phone`, `location`, `github_url`, `linkedin_url`, `resume_url`)
-VALUES (1, 'Abdul Sami', 'Full-Stack & AI Practitioner', 'Building Scalable Web Apps & Intelligent AI Systems', 'Hi, I''m Abdul Sami. I design and develop high-performance web applications using the MERN stack & Core PHP, while engineering mathematical ML models and Deep Neural Networks to power next-generation digital products.', '/images/abdul_sami_profile.png', '92%', 'ML Model Accuracy', '10+', 'AI/DS Tasks Solved', 'MERN + PHP', 'Full-Stack Core', 'sb850839@gmail.com', '+92-3228483029', 'Pakistan (Available Worldwide Remote)', 'https://github.com/Abdul-Sami1122', 'https://linkedin.com/in/abdul-sami', '/resume_abdul_sami.pdf')
+VALUES (1, 'Abdul Sami', 'Full-Stack & AI Practitioner', 'Building Scalable Web Apps & Intelligent AI Systems', 'Hi, I''m Abdul Sami. I design and develop high-performance web applications using the MERN stack & Core PHP, while engineering mathematical ML models and Deep Neural Networks to power next-generation digital products.', '/images/abdul_sami_profile.webp', '92%', 'ML Model Accuracy', '10+', 'AI/DS Tasks Solved', 'MERN + PHP', 'Full-Stack Core', 'sb850839@gmail.com', '+92-3228483029', 'Pakistan (Available Worldwide Remote)', 'https://github.com/Abdul-Sami1122', 'https://linkedin.com/in/abdul-sami', '/resume_abdul_sami.pdf')
 ON DUPLICATE KEY UPDATE `id`=1;
 
 -- --------------------------------------------------------
@@ -137,25 +137,23 @@ CREATE TABLE IF NOT EXISTS `portfolio_projects` (
   `summary` TEXT NOT NULL,
   `highlights_json` TEXT NOT NULL,
   `github_url` VARCHAR(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `portfolio_projects` (`title`, `subtitle`, `category`, `category_badge`, `image`, `tech_json`, `summary`, `highlights_json`, `github_url`) VALUES
-('Gristmill Management System', 'Decoupled Enterprise Management System', 'web', 'Full-Stack Web App', '/images/project_gristmill.png', 
-'[\"React.js\", \"Core PHP\", \"MySQL\", \"RESTful API\", \"CSS3\"]', 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicodeINSERT INTO `portfolio_projects` (`title`, `subtitle`, `category`, `category_badge`, `image`, `tech_json`, `summary`, `highlights_json`, `github_url`) VALUES
+('Gristmill Management System', 'Decoupled Enterprise Management System', 'web', 'Full-Stack Web App', '/images/project_gristmill.webp', 
+('[\"React.js\", \"Core PHP\", \"MySQL\", \"RESTful API\", \"CSS3\"]'), 
 'Designed and executed a web-based enterprise management system utilizing a decoupled React frontend and Core PHP backend architecture.', 
 '[\"Decoupled architecture separating client-side state from backend data operations.\", \"High-performance React interface communicating asynchronously with custom Core PHP endpoints.\", \"Complex data management for inventory, workflow tracking, and record keeping backed by MySQL.\"]', 
 'https://github.com/Abdul-Sami1122'),
-('Underpure E-Commerce Platform', 'Apparel E-Commerce Web Application', 'web', 'Full-Stack E-Commerce', '/images/project_underpure.png', 
+('Underpure E-Commerce Platform', 'Apparel E-Commerce Web Application', 'web', 'Full-Stack E-Commerce', '/images/project_underpure.webp', 
 '[\"React.js\", \"Core PHP\", \"MySQL\", \"API Integration\", \"Responsive Design\"]', 
 'Developed a modern web application for women''s apparel with a responsive React frontend and backend API integrations utilizing Core PHP and MySQL.', 
 '[\"Intuitive, mobile-first React shopping UI with dynamic product filtering and cart state management.\", \"Custom Core PHP API backend handling order creation, inventory sync, and secure payloads.\", \"Optimized MySQL queries for fast catalog rendering and payload transmission.\"]', 
 'https://github.com/Abdul-Sami1122'),
-('Heart Attack Prediction System', '92% Accurate Diagnostic Neural Network', 'ai', 'AI & Deep Learning', '/images/project_heart_attack.png', 
+('Heart Attack Prediction System', '92% Accurate Diagnostic Neural Network', 'ai', 'AI & Deep Learning', '/images/project_heart_attack.webp', 
 '[\"Python\", \"Scikit-Learn\", \"Deep Neural Networks\", \"Pandas\", \"NumPy\"]', 
 'Engineered a binary classification predictive model achieving 92% accuracy, successfully re-implementing the architecture using Deep Learning Neural Networks.', 
 '[\"Achieved 92% classification accuracy on multidimensional cardiovascular patient indicators.\", \"Re-architected traditional ML baseline into a custom multi-layer Deep Neural Network.\", \"Rigorous normalization, feature scaling, and model evaluation metrics (ROC-AUC, Precision, Recall).\"]', 
 'https://github.com/Abdul-Sami1122'),
-('Height Prediction Model', 'Linear Regression & Deep Neural Network Comparison', 'ai', 'Data Science & Neural Networks', '/images/project_height_prediction.png', 
+('Height Prediction Model', 'Linear Regression & Deep Neural Network Comparison', 'ai', 'Data Science & Neural Networks', '/images/project_height_prediction.webp',.png', 
 '[\"Python\", \"NumPy\", \"Pandas\", \"Matplotlib\", \"Scikit-Learn\", \"Deep Learning\"]', 
 'Built a linear regression predictive model and re-implemented it using Deep Learning Neural Networks for comprehensive accuracy comparison.', 
 '[\"Developed multi-feature linear regression model to predict physical height metrics.\", \"Re-implemented neural network architecture to evaluate non-linear feature transformation vs linear baseline.\", \"Visualized loss convergence curves across training epochs using custom Matplotlib scripts.\"]', 

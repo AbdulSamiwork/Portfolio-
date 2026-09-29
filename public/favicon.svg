@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00f2fe" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <!-- Dark Container Background -->
+  <rect width="100" height="100" rx="26" fill="#07090e" />
+  <!-- Glowing Cyan Border -->
+  <rect x="5" y="5" width="90" height="90" rx="22" fill="none" stroke="url(#cyanGrad)" stroke-width="6" filter="url(#glow)" />
+  <!-- Initial Badge AS -->
+  <text x="50" y="65" font-family="'Outfit', 'Inter', system-ui, sans-serif" font-weight="900" font-size="46" fill="url(#cyanGrad)" text-anchor="middle" letter-spacing="-1">AS</text>
+</svg>

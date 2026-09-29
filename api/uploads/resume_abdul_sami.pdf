@@ -1,0 +1,63 @@
+%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >> endobj
+4 0 obj << /Length 1349 >> stream
+BT
+/F2 20 Tf
+50 740 Td
+(ABDUL SAMI - RESUME / CURRICULUM VITAE) Tj
+/F1 11 Tf
+0 -25 Td
+(Full-Stack Web Developer & Machine Learning Practitioner) Tj
+0 -16 Td
+(Email: sb850839@gmail.com | Phone: +92-3228483029 | Location: Pakistan) Tj
+0 -16 Td
+(GitHub: https://github.com/Abdul-Sami1122 | LinkedIn: https://linkedin.com/in/abdul-sami) Tj
+0 -25 Td
+/F2 13 Tf
+(PROFESSIONAL SUMMARY) Tj
+/F1 10 Tf
+0 -16 Td
+(Full-Stack Web Developer and ML Practitioner holding a B.S. in Information Technology from) Tj
+0 -14 Td
+(University of the Punjab. Proven expertise in React.js, Node.js, Core PHP, MySQL, and) Tj
+0 -14 Td
+(engineering Deep Neural Networks with 92% diagnostic accuracy.) Tj
+0 -25 Td
+/F2 13 Tf
+(TECHNICAL SKILLS) Tj
+/F1 10 Tf
+0 -16 Td
+(Frontend: React.js, Tailwind CSS, JavaScript ES6+, Vite, HTML5/CSS3) Tj
+0 -14 Td
+(Backend: Core PHP, Node.js, Express, RESTful APIs, Session & JWT Authentication) Tj
+0 -14 Td
+(Database: MySQL, MongoDB, Database Optimization, PDO Architecture) Tj
+0 -14 Td
+(AI & ML: Python, PyTorch, Scikit-learn, Neural Networks, Predictive Modeling) Tj
+0 -25 Td
+/F2 13 Tf
+(EDUCATION & CERTIFICATIONS) Tj
+/F1 10 Tf
+0 -16 Td
+(B.S. in Information Technology - University of the Punjab (2021 - 2025)) Tj
+0 -14 Td
+(Microsoft Certified: Azure AI Fundamentals (AI-900)) Tj
+0 -14 Td
+(NAVTTC Full Stack Web Development Certification) Tj
+ET
+endstream
+endobj
+5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
+6 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000067 00000 n 
+0000000124 00000 n 
+trailer << /Size 7 /Root 1 0 R >>
+startxref
+1885
+%%EOF

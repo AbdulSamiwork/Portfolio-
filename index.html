@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdul Sami | Full-Stack Web Developer & Machine Learning Specialist</title>
+    <meta name="description" content="Portfolio of Abdul Sami — Full-Stack Web Developer (MERN, PHP) and Machine Learning & Deep Learning Specialist (Python, Azure AI, Scikit-Learn)." />
+    <meta name="keywords" content="Abdul Sami, Full-Stack Developer, Machine Learning Engineer, MERN Stack, PHP, React, Python, Deep Learning, Azure AI, Portfolio" />
+    <meta name="author" content="Abdul Sami" />
+
+    <meta name="theme-color" content="#06080e" />
+
+    <!-- Google Fonts: Outfit (Headings), Inter (Body), Fira Code (Code Snippets) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Preload Hero LCP Image -->
+    <link rel="preload" as="image" href="/images/abdul_sami_profile.webp" type="image/webp" fetchpriority="high">
+
+    <!-- Tailwind CSS CDN Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: '#06080e',
+              brand: {
+                DEFAULT: 'var(--accent-primary)',
+                secondary: 'var(--accent-secondary)',
+                border: 'var(--accent-border)',
+                glow: 'var(--accent-glow)',
+              },
+              cyanAccent: '#00f2fe',
+              blueAccent: '#4facfe',
+              purpleAccent: '#8b5cf6',
+              emeraldAccent: '#10b981',
+            },
+            fontFamily: {
+              heading: ['Outfit', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+              code: ['Fira Code', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#06080e] text-slate-100 antialiased selection:bg-cyan-500/20 selection:text-cyan-300">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

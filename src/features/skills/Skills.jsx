@@ -27,6 +27,9 @@ export default function Skills() {
 
   const activeSkills = skillsList.filter((s) => {
     const cat = (s.category || 'web').toLowerCase().trim();
+    if (activeCategory === 'tools' || activeCategory === 'cloud') {
+      return cat === 'tools' || cat === 'cloud';
+    }
     return cat === activeCategory;
   });
   const activeConfig = categories.find((c) => c.id === activeCategory);

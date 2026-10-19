@@ -122,6 +122,10 @@ export default function Testimonials() {
                           <img
                             src={testimonial.avatar}
                             alt={testimonial.name || 'Client avatar'}
+                            loading="lazy"
+                            decoding="async"
+                            width="48"
+                            height="48"
                             className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-white/20 shadow-md flex-shrink-0"
                             onError={(e) => {
                               e.currentTarget.style.display = 'none';

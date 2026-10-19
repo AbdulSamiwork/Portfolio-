@@ -1,12 +1,17 @@
 <?php
 require_once __DIR__ . '/../../core/Database.php';
 require_once __DIR__ . '/../../core/Response.php';
+require_once __DIR__ . '/../../core/EnvLoader.php';
 
 class AuthController {
     public static function login() {
+        EnvLoader::load();
         $data = Response::getJsonInput();
         $username = $data['username'] ?? '';
         $password = $data['password'] ?? '';
+        $adminFallbackPass = EnvLoader::get('ADMIN_FALLBACK_PASSWORD', '');
+        $adminEmail = EnvLoader::get('ADMIN_EMAIL', '');
+        $demoToken = EnvLoader::get('DEMO_SESSION_TOKEN', 'demo_admin_session_token_12345');
 
         if (empty($username) || empty($password)) {
             Response::error("Username and password are required.");
@@ -16,8 +21,8 @@ class AuthController {
 
         if (!$db) {
             // Demo fallback mode if MySQL server is offline during initial frontend testing
-            if (($username === 'admin' || $username === 'sb850839@gmail.com' || strtolower($username) === 'sami') && $password === 'Abdul@Sami$1122') {
-                $token = 'demo_admin_session_token_12345';
+            if (($username === 'admin' || $username === $adminEmail || strtolower($username) === 'sami') && $password === $adminFallbackPass) {
+                $token = $demoToken;
                 Response::json([
                     "status" => "success",
                     "message" => "Admin authentication successful.",
@@ -34,15 +39,16 @@ class AuthController {
         }
 
         // MySQL Auth Procedure
-        $query = "SELECT id, username, email, password_hash, role FROM users WHERE username = :user OR email = :user OR username = 'admin' LIMIT 1";
+        $query = "SELECT id, username, email, password_hash, role FROM users WHERE username = :user1 OR email = :user2 OR username = 'admin' LIMIT 1";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(":user", $username);
+        $stmt->bindParam(":user1", $username);
+        $stmt->bindParam(":user2", $username);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $isValidPassword = password_verify($password, $row['password_hash']) 
-                || $password === 'Abdul@Sami$1122';
+                || $password === $adminFallbackPass;
 
             if ($isValidPassword) {
                 $token = bin2hex(random_bytes(32));

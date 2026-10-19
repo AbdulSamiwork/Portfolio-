@@ -1,0 +1,14 @@
+# Environment files (contain secrets - NEVER commit!)
+.env
+.env.local
+.env.*.local
+
+# Uploads directory (user content)
+uploads/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

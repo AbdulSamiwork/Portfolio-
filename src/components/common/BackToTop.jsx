@@ -27,6 +27,7 @@ export default function BackToTop() {
 
   if (!isVisible) return null;
 
+  return (
     <button
       onClick={scrollToTop}
       className="fixed bottom-[74px] right-5 sm:bottom-[80px] sm:right-6 z-40 w-11 h-11 rounded-full bg-[#090d16]/90 border text-[var(--accent-primary)] flex items-center justify-center backdrop-blur-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer animate-fade-in group focus:outline-none"
@@ -39,4 +40,5 @@ export default function BackToTop() {
     >
       <ArrowUp size={18} className="transition-transform duration-300 group-hover:-translate-y-1" />
     </button>
+  );
 }

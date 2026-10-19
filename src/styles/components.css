@@ -1,0 +1,238 @@
+/* Glassmorphism 2.0 Luxury Surface Classes */
+.glass-panel {
+  background: rgba(13, 19, 33, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(13, 19, 33, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-border);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-subtle), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Metric Card Emerald Matrix Animated Hover - Soft Tone for Ultra Readability */
+.metric-card-emerald {
+  position: relative;
+  overflow: hidden;
+  background: rgba(9, 14, 25, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.metric-card-emerald::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.16) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 85%);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.metric-card-emerald::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(52, 211, 153, 0.1) 0deg, transparent 90deg, rgba(16, 185, 129, 0.08) 180deg, transparent 270deg, rgba(52, 211, 153, 0.1) 360deg);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.metric-card-emerald:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(52, 211, 153, 0.38);
+  box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.85), 0 0 24px rgba(16, 185, 129, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.metric-card-emerald:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.metric-card-emerald:hover::after {
+  opacity: 1;
+  animation: emeraldConicSpin 10s linear infinite;
+}
+
+@keyframes emeraldConicSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Philosophy Section Color-Matched Animated Cards */
+.card-animated-emerald,
+.card-animated-purple,
+.card-animated-cyan {
+  position: relative;
+  overflow: hidden;
+  background: rgba(9, 14, 25, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+/* Emerald Card (Full-Stack Web Mastery) */
+.card-animated-emerald::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 15%, rgba(52, 211, 153, 0.16) 0%, rgba(16, 185, 129, 0.07) 50%, transparent 85%);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-emerald::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(52, 211, 153, 0.1) 0deg, transparent 90deg, rgba(16, 185, 129, 0.08) 180deg, transparent 270deg, rgba(52, 211, 153, 0.1) 360deg);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-emerald:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(52, 211, 153, 0.38);
+  box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.85), 0 0 26px rgba(16, 185, 129, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.card-animated-emerald:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-animated-emerald:hover::after {
+  opacity: 1;
+  animation: emeraldConicSpin 10s linear infinite;
+}
+
+/* Purple Card (Applied AI & Deep Learning) */
+.card-animated-purple::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 15%, rgba(192, 132, 252, 0.16) 0%, rgba(168, 85, 247, 0.07) 50%, transparent 85%);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-purple::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(192, 132, 252, 0.1) 0deg, transparent 90deg, rgba(168, 85, 247, 0.08) 180deg, transparent 270deg, rgba(192, 132, 252, 0.1) 360deg);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-purple:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(192, 132, 252, 0.38);
+  box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.85), 0 0 26px rgba(168, 85, 247, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.card-animated-purple:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-animated-purple:hover::after {
+  opacity: 1;
+  animation: emeraldConicSpin 10s linear infinite;
+}
+
+/* Cyan Card (Cloud & Production Ready) */
+.card-animated-cyan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 15%, rgba(56, 189, 248, 0.16) 0%, rgba(6, 182, 212, 0.07) 50%, transparent 85%);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-cyan::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(56, 189, 248, 0.1) 0deg, transparent 90deg, rgba(6, 182, 212, 0.08) 180deg, transparent 270deg, rgba(56, 189, 248, 0.1) 360deg);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-animated-cyan:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(56, 189, 248, 0.38);
+  box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.85), 0 0 26px rgba(6, 182, 212, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.card-animated-cyan:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-animated-cyan:hover::after {
+  opacity: 1;
+  animation: emeraldConicSpin 10s linear infinite;
+}
+
+/* Laser Timeline Line */
+.laser-line {
+  background: linear-gradient(180deg, var(--accent-primary) 0%, #8b5cf6 50%, var(--accent-primary) 100%);
+  box-shadow: 0 0 12px var(--accent-glow);
+}

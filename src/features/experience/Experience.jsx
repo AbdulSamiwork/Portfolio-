@@ -36,26 +36,36 @@ export default function Experience() {
 
         {/* Timeline Container with Vertical Laser Track */}
         <div className="max-w-4xl mx-auto relative">
-          {/* Vertical Glowing Laser Line - Centered with sub-pixel precision */}
-          <div className="hidden sm:block absolute left-6 -translate-x-1/2 top-7 bottom-7 w-0.5 laser-line opacity-40 rounded-full pointer-events-none" />
+          {displayedExperiences.length === 0 ? (
+            <div className="text-center py-12 px-4 rounded-2xl border border-dashed border-white/10 bg-white/[0.02]">
+              <p className="text-slate-400 text-sm m-0">No career milestones registered yet.</p>
+            </div>
+          ) : (
+            <>
+              {/* Vertical Glowing Laser Line - Centered with sub-pixel precision */}
+              <div className="hidden sm:block absolute left-6 -translate-x-1/2 top-7 bottom-7 w-0.5 laser-line opacity-40 rounded-full pointer-events-none" />
 
-          <div className="flex flex-col gap-6 sm:gap-8">
-            {displayedExperiences.map((exp, index) => {
-              const isWeb = exp.category === 'web';
-              const glowVariant = isWeb ? 'emerald' : 'purple';
-              const dotBorder = isWeb
-                ? 'border-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.5)]'
-                : 'border-purple-400 shadow-[0_0_14px_rgba(168,85,247,0.5)]';
-              const dotCore = isWeb ? 'bg-emerald-400' : 'bg-purple-400';
-              const accentColor = isWeb ? 'text-emerald-400' : 'text-purple-400';
+              <div className="flex flex-col gap-6 sm:gap-8">
+                {displayedExperiences.map((exp, index) => {
+                  const cat = (exp.category || 'web').toLowerCase().trim();
+                  const isCloud = cat === 'cloud' || cat === 'tools';
+                  const isWeb = cat === 'web';
+                  const glowVariant = isCloud ? 'cyan' : isWeb ? 'emerald' : 'purple';
+                  const dotBorder = isCloud
+                    ? 'border-cyan-400 shadow-[0_0_14px_rgba(6,182,212,0.5)]'
+                    : isWeb
+                    ? 'border-emerald-400 shadow-[0_0_14px_rgba(16,185,129,0.5)]'
+                    : 'border-purple-400 shadow-[0_0_14px_rgba(168,85,247,0.5)]';
+                  const dotCore = isCloud ? 'bg-cyan-400' : isWeb ? 'bg-emerald-400' : 'bg-purple-400';
+                  const accentColor = isCloud ? 'text-cyan-400' : isWeb ? 'text-emerald-400' : 'text-purple-400';
 
-              return (
-                <div
-                  key={exp.id || index}
-                  className={`reveal-${index % 2 === 0 ? 'left' : 'right'} delay-${
-                    (index + 1) * 100
-                  } relative sm:pl-16 group`}
-                >
+                  return (
+                    <div
+                      key={exp.id || index}
+                      className={`reveal-${index % 2 === 0 ? 'left' : 'right'} delay-${
+                        (index + 1) * 100
+                      } relative sm:pl-16 group active`}
+                    >
                   {/* Glowing Node Dot on Timeline - Exactly Centered on the Laser Line */}
                   <div
                     className={`hidden sm:flex absolute left-6 -translate-x-1/2 top-7 w-5 h-5 rounded-full bg-[#06080e] border-2 items-center justify-center transition-all duration-300 group-hover:scale-125 z-20 pointer-events-none ${dotBorder}`}
@@ -79,7 +89,9 @@ export default function Experience() {
                             </h3>
                             <span
                               className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold font-code uppercase tracking-wider transition-colors duration-300 ${
-                                isWeb
+                                isCloud
+                                  ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
+                                  : isWeb
                                   ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
                                   : 'bg-purple-500/10 text-purple-400 border border-purple-500/30'
                               }`}
@@ -139,7 +151,9 @@ export default function Experience() {
                               <span
                                 key={sIdx}
                                 className={`px-2.5 py-0.5 rounded-lg text-[10px] sm:text-xs font-code bg-white/5 border border-white/10 text-slate-300 transition-all duration-200 hover:scale-105 ${
-                                  isWeb
+                                  isCloud
+                                    ? 'hover:border-cyan-500/40 hover:text-cyan-300'
+                                    : isWeb
                                     ? 'hover:border-emerald-500/40 hover:text-emerald-300'
                                     : 'hover:border-purple-500/40 hover:text-purple-300'
                                 }`}
@@ -155,7 +169,9 @@ export default function Experience() {
                 </div>
               );
             })}
-          </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Animated Show More / Show Less Toggle */}

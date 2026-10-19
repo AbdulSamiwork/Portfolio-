@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `portfolio_hero` (
   `title_tag` VARCHAR(100) NOT NULL,
   `headline` VARCHAR(255) NOT NULL,
   `bio` TEXT NOT NULL,
-  `profile_image` VARCHAR(255) NOT NULL,
+  `profile_image` VARCHAR(1000) NOT NULL,
   `metric1_value` VARCHAR(50),
   `metric1_label` VARCHAR(50),
   `metric2_value` VARCHAR(50),
@@ -38,12 +38,16 @@ CREATE TABLE IF NOT EXISTS `portfolio_hero` (
   `location` VARCHAR(100),
   `github_url` VARCHAR(255),
   `linkedin_url` VARCHAR(255),
-  `resume_url` VARCHAR(500) DEFAULT '/resume_abdul_sami.pdf'
+  `resume_url` VARCHAR(1000) DEFAULT '/resume_abdul_sami.pdf',
+  `primary_cta_text` VARCHAR(100) DEFAULT 'Explore Work',
+  `primary_cta_link` VARCHAR(255) DEFAULT '#projects',
+  `secondary_cta_text` VARCHAR(100) DEFAULT 'Get In Touch',
+  `secondary_cta_link` VARCHAR(255) DEFAULT '#contact'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Seed Hero Section
-INSERT INTO `portfolio_hero` (`id`, `name`, `title_tag`, `headline`, `bio`, `profile_image`, `metric1_value`, `metric1_label`, `metric2_value`, `metric2_label`, `metric3_value`, `metric3_label`, `email`, `phone`, `location`, `github_url`, `linkedin_url`, `resume_url`)
-VALUES (1, 'Abdul Sami', 'Full-Stack & AI Practitioner', 'Building Scalable Web Apps & Intelligent AI Systems', 'Hi, I''m Abdul Sami. I design and develop high-performance web applications using the MERN stack & Core PHP, while engineering mathematical ML models and Deep Neural Networks to power next-generation digital products.', '/images/abdul_sami_profile.png', '92%', 'ML Model Accuracy', '10+', 'AI/DS Tasks Solved', 'MERN + PHP', 'Full-Stack Core', 'sb850839@gmail.com', '+92-3228483029', 'Pakistan (Available Worldwide Remote)', 'https://github.com/Abdul-Sami1122', 'https://linkedin.com/in/abdul-sami', '/resume_abdul_sami.pdf')
+INSERT INTO `portfolio_hero` (`id`, `name`, `title_tag`, `headline`, `bio`, `profile_image`, `metric1_value`, `metric1_label`, `metric2_value`, `metric2_label`, `metric3_value`, `metric3_label`, `email`, `phone`, `location`, `github_url`, `linkedin_url`, `resume_url`, `primary_cta_text`, `primary_cta_link`, `secondary_cta_text`, `secondary_cta_link`)
+VALUES (1, 'Abdul Sami', 'Full-Stack & AI Practitioner', 'Building Scalable Web Apps & Intelligent AI Systems', 'Hi, I''m Abdul Sami. I design and develop high-performance web applications using the MERN stack & Core PHP, while engineering mathematical ML models and Deep Neural Networks to power next-generation digital products.', '/images/abdul_sami_profile.png', '92%', 'ML Model Accuracy', '10+', 'AI/DS Tasks Solved', 'MERN + PHP', 'Full-Stack Core', 'sb850839@gmail.com', '+92-3228483029', 'Pakistan (Available Worldwide Remote)', 'https://github.com/Abdul-Sami1122', 'https://linkedin.com/in/abdul-sami', '/resume_abdul_sami.pdf', 'Explore Work', '#projects', 'Get In Touch', '#contact')
 ON DUPLICATE KEY UPDATE `id`=`id`;
 
 -- 3. About Section Table
@@ -54,12 +58,19 @@ CREATE TABLE IF NOT EXISTS `portfolio_about` (
   `card_heading` VARCHAR(255) NOT NULL,
   `paragraph1` TEXT NOT NULL,
   `paragraph2` TEXT NOT NULL,
-  `paragraph3` TEXT NOT NULL
+  `paragraph3` TEXT NOT NULL,
+  `philosophy` VARCHAR(255) DEFAULT '',
+  `degree` VARCHAR(150) DEFAULT 'B.S. Information Technology',
+  `institution` VARCHAR(150) DEFAULT 'University of the Punjab',
+  `years_exp` VARCHAR(50) DEFAULT '2+',
+  `projects_completed` VARCHAR(50) DEFAULT '15+',
+  `tech_mastered` VARCHAR(50) DEFAULT '20+',
+  `highlights_json` TEXT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Seed About Section
-INSERT INTO `portfolio_about` (`id`, `section_title`, `section_subtitle`, `card_heading`, `paragraph1`, `paragraph2`, `paragraph3`)
-VALUES (1, 'Architecting the Fusion of Web & Artificial Intelligence', 'Bridging software engineering precision with data-driven predictive modeling.', 'Engineering Beyond the Surface', 'I am a Full-Stack Web Developer and Machine Learning Practitioner holding a B.S. in Information Technology from the University of the Punjab. My expertise lies at the intersection of modern software architecture and intelligent predictive algorithms.', 'On the web, I construct scalable applications using the MERN Stack (MongoDB, Express, React, Node.js) and Core PHP & MySQL. Whether correcting complex logical inversions in order-processing systems or designing decoupled React architectures, I focus on clean code and reliable performance.', 'In AI, I dive deep into mathematical foundations—deriving loss functions, optimizing matrix dimensions, and building custom Deep Neural Networks. Certified in Microsoft Azure AI-900, I build intelligent systems ready to integrate seamlessly into web environments.')
+INSERT INTO `portfolio_about` (`id`, `section_title`, `section_subtitle`, `card_heading`, `paragraph1`, `paragraph2`, `paragraph3`, `philosophy`, `degree`, `institution`, `years_exp`, `projects_completed`, `tech_mastered`)
+VALUES (1, 'Architecting the Fusion of Web & Artificial Intelligence', 'Bridging software engineering precision with data-driven predictive modeling.', 'Engineering Beyond the Surface', 'I am a Full-Stack Web Developer and Machine Learning Practitioner holding a B.S. in Information Technology from the University of the Punjab. My expertise lies at the intersection of modern software architecture and intelligent predictive algorithms.', 'On the web, I construct scalable applications using the MERN Stack (MongoDB, Express, React, Node.js) and Core PHP & MySQL. Whether correcting complex logical inversions in order-processing systems or designing decoupled React architectures, I focus on clean code and reliable performance.', 'In AI, I dive deep into mathematical foundations—deriving loss functions, optimizing matrix dimensions, and building custom Deep Neural Networks. Certified in Microsoft Azure AI-900, I build intelligent systems ready to integrate seamlessly into web environments.', 'Bridging software engineering precision with data-driven predictive modeling.', 'B.S. Information Technology', 'University of the Punjab', '2+', '15+', '20+')
 ON DUPLICATE KEY UPDATE `id`=`id`;
 
 -- 4. Skills Table
@@ -90,11 +101,14 @@ CREATE TABLE IF NOT EXISTS `portfolio_projects` (
   `subtitle` VARCHAR(150) NOT NULL,
   `category` VARCHAR(50) NOT NULL,
   `category_badge` VARCHAR(100) NOT NULL,
-  `image` VARCHAR(255) NOT NULL,
+  `image` VARCHAR(1000) NOT NULL,
   `tech_json` TEXT NOT NULL,
   `summary` TEXT NOT NULL,
   `highlights_json` TEXT NOT NULL,
-  `github_url` VARCHAR(255) DEFAULT NULL
+  `github_url` VARCHAR(255) DEFAULT 'https://github.com/Abdul-Sami1122',
+  `demo_url` VARCHAR(255) DEFAULT 'https://github.com/Abdul-Sami1122',
+  `show_demo` TINYINT(1) DEFAULT 1,
+  `is_in_progress` TINYINT(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 7. Certifications Table
@@ -107,4 +121,29 @@ CREATE TABLE IF NOT EXISTS `portfolio_certifications` (
   `badge` VARCHAR(50) DEFAULT NULL,
   `category` VARCHAR(50) DEFAULT 'web',
   `description` TEXT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 8. Messages Table
+CREATE TABLE IF NOT EXISTS `portfolio_messages` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `message` TEXT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `is_read` TINYINT(1) DEFAULT 0,
+  `is_starred` TINYINT(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 9. Testimonials Table
+CREATE TABLE IF NOT EXISTS `portfolio_testimonials` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL,
+  `role` VARCHAR(150) NOT NULL,
+  `company` VARCHAR(150) NOT NULL,
+  `avatar` VARCHAR(1000) NOT NULL,
+  `rating` INT DEFAULT 5,
+  `content` TEXT NOT NULL,
+  `date` VARCHAR(50) DEFAULT NULL,
+  `verified` TINYINT(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

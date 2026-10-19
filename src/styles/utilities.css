@@ -1,0 +1,125 @@
+
+/* Radar Ping Beacon Indicator */
+.radar-beacon {
+  position: relative;
+  display: inline-flex;
+}
+
+.radar-beacon::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  background: #10b981;
+  opacity: 0.6;
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radarPing {
+
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Text Gradients */
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(180deg, #ffffff 20%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Button Shimmer Sweep */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 20%, rgba(255, 255, 255, 0.18) 50%, transparent 80%);
+  transform: rotate(30deg) translateX(-100%);
+  transition: transform 0.75s ease;
+}
+
+.btn-shimmer:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+
+/* Code Snippet Token Highlighting */
+.tok-kw {
+  color: #c084fc;
+  font-weight: 600;
+}
+
+.tok-fn {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.tok-str {
+  color: #34d399;
+}
+
+.tok-com {
+  color: #64748b;
+  font-style: italic;
+}
+
+.tok-cls {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.tok-num {
+  color: #f472b6;
+  font-weight: 500;
+}
+
+.tok-op {
+  color: #00f2fe;
+}
+
+.tok-punct {
+  color: #94a3b8;
+}
+
+.tok-param {
+  color: #fdba74;
+}
+
+/* Custom Emerald Matrix Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #06080e;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981 0%, #34d399 50%, #059669 100%);
+  border-radius: 9999px;
+  border: 1px solid rgba(6, 8, 14, 0.8);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #34d399 0%, #6ee7b7 50%, #10b981 100%);
+  box-shadow: 0 0 16px rgba(52, 211, 153, 0.85);
+}

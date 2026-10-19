@@ -1,5 +1,5 @@
 # ==========================================================
-# Frontend SPA Router & Caching (.htaccess for Apache/InfinityFree)
+# Frontend SPA Router, SEO & Caching (.htaccess for Apache/InfinityFree)
 # ==========================================================
 
 <IfModule mod_rewrite.c>
@@ -9,6 +9,20 @@
   # Allow direct access to the backend API directory
   RewriteRule ^api/ - [L]
 
+  # Allow direct access to sitemap.xml and robots.txt
+  RewriteRule ^sitemap\.xml$ sitemap.xml [L]
+  RewriteRule ^robots\.txt$ robots.txt [L]
+  RewriteRule ^share\.php$ share.php [L]
+
+  # Dynamic Social Media Sharing: Route Crawlers to share.php for Rich Previews (WhatsApp, Twitter, Facebook, LinkedIn)
+  RewriteCond %{QUERY_STRING} (?:^|&)project=([^&]+) [NC]
+  RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|WhatsApp|Twitterbot|LinkedInBot|TelegramBot|Discordbot|SkypeUriPreview) [NC]
+  RewriteRule ^$ share.php?id=%1 [L]
+
+  # Pretty URL for sharing: /project/:id for social crawlers
+  RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|WhatsApp|Twitterbot|LinkedInBot|TelegramBot|Discordbot|SkypeUriPreview) [NC]
+  RewriteRule ^project/([^/]+)/?$ share.php?id=$1 [L]
+
   # Exclude existing files and directories from rewrite
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
@@ -16,6 +30,14 @@
 
   # Route all other URLs to index.html for React SPA
   RewriteRule ^ index.html [L]
+</IfModule>
+
+# Ensure Correct Content-Types for SEO Assets
+<IfModule mod_mime.c>
+  AddType application/xml .xml
+  AddType text/plain .txt
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
 </IfModule>
 
 # Enable Gzip / Deflate Compression
@@ -30,6 +52,10 @@
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 month"
+
+  # Sitemaps & Robots - 1 day
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/plain "access plus 1 day"
 
   # Images & Media - 1 year
   ExpiresByType image/webp "access plus 1 year"
@@ -63,5 +89,8 @@
   <FilesMatch "index\.html$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
   </FilesMatch>
+  # Specific Cache-Control for sitemap.xml
+  <FilesMatch "sitemap\.xml$">
+    Header set Cache-Control "max-age=86400, public"
+  </FilesMatch>
 </IfModule>
-

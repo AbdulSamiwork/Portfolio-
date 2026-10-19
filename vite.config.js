@@ -9,8 +9,14 @@ export default defineConfig({
   root: __dirname,
   plugins: [react()],
   server: {
-    host: true, // Listen on all network addresses (0.0.0.0) for mobile LAN testing
+    host: true,
     port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     cssMinify: true,

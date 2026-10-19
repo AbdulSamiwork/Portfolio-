@@ -62,6 +62,61 @@ export default function Projects() {
     });
   };
 
+  // Deep link detection for URL parameters (?project=) and hashes (#project-)
+  React.useEffect(() => {
+    if (!projects || projects.length === 0) return;
+
+    const checkProjectInUrl = () => {
+      const searchParams = new URLSearchParams(window.location.search);
+      const projQuery = searchParams.get('project');
+      const hash = window.location.hash;
+      const hashMatch = hash.match(/^#project-([a-zA-Z0-9_-]+)/i);
+      const targetId = projQuery || (hashMatch ? hashMatch[1] : null);
+
+      if (targetId) {
+        const found = projects.find(
+          (p) => String(p.id).toLowerCase() === String(targetId).toLowerCase()
+        );
+        if (found) {
+          setSelectedProject(found);
+        }
+      }
+    };
+
+    checkProjectInUrl();
+    window.addEventListener('popstate', checkProjectInUrl);
+    window.addEventListener('hashchange', checkProjectInUrl);
+    return () => {
+      window.removeEventListener('popstate', checkProjectInUrl);
+      window.removeEventListener('hashchange', checkProjectInUrl);
+    };
+  }, [projects]);
+
+  const handleSelectProject = (project) => {
+    setSelectedProject(project);
+    if (project?.id) {
+      window.history.replaceState(
+        {},
+        '',
+        `${window.location.pathname}?project=${encodeURIComponent(project.id)}`
+      );
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+    if (window.location.search.includes('project=')) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('project');
+      const cleanUrl = url.pathname + (url.search ? url.search : '') + (url.hash.startsWith('#project-') ? '' : url.hash);
+      window.history.replaceState({}, '', cleanUrl || '/');
+    } else if (window.location.hash.startsWith('#project-')) {
+      window.history.replaceState({}, '', window.location.pathname + window.location.search);
+    }
+  };
+
+
+
   return (
     <section id="projects" className="py-12 sm:py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -142,7 +197,7 @@ export default function Projects() {
                 key={project.id}
                 project={project}
                 isMobile={true}
-                onOpenDetails={setSelectedProject}
+                onOpenDetails={handleSelectProject}
               />
             ))}
           </div>
@@ -173,7 +228,7 @@ export default function Projects() {
               key={project.id}
               project={project}
               isMobile={false}
-              onOpenDetails={setSelectedProject}
+              onOpenDetails={handleSelectProject}
             />
           ))}
         </div>
@@ -201,7 +256,7 @@ export default function Projects() {
         {/* Project Detail Modal Overlay */}
         <ProjectDetailModal
           project={selectedProject}
-          onClose={() => setSelectedProject(null)}
+          onClose={handleCloseModal}
         />
       </div>
     </section>

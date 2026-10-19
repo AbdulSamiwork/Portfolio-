@@ -1,0 +1,43 @@
+# ==========================================================
+# Robots.txt for Abdul Sami Portfolio
+# Domain: https://abdulsami.tech
+# ==========================================================
+
+User-agent: *
+Allow: /
+Allow: /images/
+Allow: /resume_abdul_sami.pdf
+Disallow: /api/
+Disallow: /sami
+Disallow: /admin
+Disallow: /tmp/
+
+# Social Media Previews & Open Graph Bots (Allow explicitly)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# Canonical Sitemap URL for Google Search Console & Indexers
+Sitemap: https://abdulsami.tech/sitemap.xml
+Host: abdulsami.tech

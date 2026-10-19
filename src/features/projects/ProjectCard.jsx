@@ -37,16 +37,20 @@ export default function ProjectCard({
       {/* Project Banner with Zoom */}
       <div className="relative w-full h-40 sm:h-52 bg-slate-950 overflow-hidden">
         <img
-          src={project.image || '/images/project_gristmill.webp'}
+          src={project.image || (isWeb ? '/images/project_gristmill.webp' : '/images/project_network.webp')}
           alt={project.title}
           loading="lazy"
           decoding="async"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = isWeb ? '/images/project_gristmill.webp' : '/images/project_network.webp';
+          }}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#06080e] via-transparent to-black/40 pointer-events-none" />
 
-        {/* Category Pill Tag */}
-        <div className="absolute top-3 left-3 z-10">
+        {/* Category Pill Tag & In-Progress Status */}
+        <div className="absolute top-3 left-3 z-10 flex items-center gap-2 flex-wrap max-w-[80%]">
           <span
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold font-code uppercase tracking-wider backdrop-blur-md shadow-md ${
               isWeb
@@ -57,6 +61,12 @@ export default function ProjectCard({
             {getIcon(project.category)}
             <span>{project.categoryBadge}</span>
           </span>
+
+          {Boolean(project.isInProgress) && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold font-code uppercase tracking-wider bg-amber-500/25 text-amber-300 border border-amber-400/50 backdrop-blur-md shadow-md animate-pulse">
+              🚧 In Progress
+            </span>
+          )}
         </div>
 
         {/* Quick Details Trigger */}
@@ -125,8 +135,7 @@ export default function ProjectCard({
               <Github size={14} /> Code
             </a>
 
-            {(project.showDemo === true ||
-              (project.showDemo !== false && (project.demoUrl || project.demo))) && (
+            {(project.showDemo !== false && project.showDemo !== 0 && project.showDemo !== '0') && (
               <a
                 href={project.demoUrl || project.demo || '#'}
                 target="_blank"

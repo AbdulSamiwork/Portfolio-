@@ -20,10 +20,11 @@ class CertificationsController {
                     ':period' => $data['period'] ?? '',
                     ':badge' => $data['badge'] ?? 'Certified',
                     ':cat' => $data['category'] ?? 'web',
-                    ':desc' => $data['desc'] ?? ''
+                    ':desc' => $data['desc'] ?? ($data['description'] ?? '')
                 ]);
                 $data['id'] = $db->lastInsertId();
             }
+            Response::json(["status" => "success", "message" => "Certification added successfully.", "data" => $data], 201);
         } elseif ($method === 'PUT') {
             $id = $_GET['id'] ?? ($data['id'] ?? null);
             if ($id && $db) {

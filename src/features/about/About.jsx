@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePortfolio } from '../../context/PortfolioContext';
-import { Layers, Brain, Cloud, ChevronDown, ChevronUp, Sparkles, Award } from 'lucide-react';
+import { Layers, Brain, Cloud, ChevronDown, ChevronUp, Sparkles, Award, Quote } from 'lucide-react';
 import SectionHeader from '../../components/common/SectionHeader';
 import GlassCard from '../../components/common/GlassCard';
 import SectionSkeleton from '../../components/common/SectionSkeleton';
@@ -20,7 +20,7 @@ export default function About() {
     );
   }
 
-  const highlights = [
+  const defaultHighlights = [
     {
       icon: <Layers size={22} className="text-emerald-400 group-hover:scale-110 transition-transform duration-300" />,
       title: 'Full-Stack Web Mastery',
@@ -50,14 +50,26 @@ export default function About() {
     },
   ];
 
+  const highlights = Array.isArray(about.highlights) && about.highlights.length > 0
+    ? defaultHighlights.map((def, idx) => {
+        const custom = about.highlights[idx] || {};
+        return {
+          ...def,
+          title: custom.title || def.title,
+          description: custom.description || def.description,
+          badge: custom.badge || def.badge,
+        };
+      })
+    : defaultHighlights;
+
   return (
     <section id="about" className="py-12 sm:py-16 lg:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeader
           badgeIcon={<Sparkles size={13} className="text-[var(--accent-primary)]" />}
           badgeText="Profile &amp; Engineering Philosophy"
-          title={about.sectionTitle || 'Architecting Modern Web & Scalable Intelligence'}
-          description={about.sectionSubtitle}
+          title={about.sectionTitle || about.title || 'Architecting Modern Web & Scalable Intelligence'}
+          description={about.sectionSubtitle || about.subtitle}
         />
 
         {/* Narrative Box with Luxury Glass Panel */}
@@ -81,11 +93,11 @@ export default function About() {
                   {hero.name}
                 </h4>
                 <p className="text-xs sm:text-sm text-[var(--accent-primary)] font-code mt-0.5 sm:mt-1 truncate">
-                  B.S. Information Technology
+                  {about.degree || 'B.S. Information Technology'}
                 </p>
                 <div className="inline-flex items-center gap-1.5 mt-1.5 sm:mt-2 px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs text-slate-300 max-w-full">
                   <Award size={12} className="text-amber-400 flex-shrink-0" />
-                  <span className="truncate">University of the Punjab</span>
+                  <span className="truncate">{about.institution || 'University of the Punjab'}</span>
                 </div>
               </div>
             </div>
@@ -93,7 +105,7 @@ export default function About() {
             {/* Bio Text with Progressive Disclosure for Mobile */}
             <div className="md:col-span-8 flex flex-col">
               <h3 className="text-lg sm:text-2xl font-bold font-heading text-white mb-2 sm:mb-4">
-                {about.cardHeading}
+                {about.cardHeading || 'Engineering Beyond the Surface'}
               </h3>
               <p className="text-xs sm:text-base text-slate-300 leading-relaxed mb-3 sm:mb-4">
                 {about.paragraph1}
@@ -105,29 +117,61 @@ export default function About() {
                   isBioExpanded ? 'block' : 'hidden sm:block'
                 }`}
               >
-                <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
-                  {about.paragraph2}
-                </p>
-                <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
-                  {about.paragraph3}
-                </p>
+                {about.paragraph2 && (
+                  <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
+                    {about.paragraph2}
+                  </p>
+                )}
+                {about.paragraph3 && (
+                  <p className="text-xs sm:text-base text-slate-300 leading-relaxed">
+                    {about.paragraph3}
+                  </p>
+                )}
               </div>
 
+              {/* Core Philosophy Quote if available */}
+              {about.philosophy && (
+                <div className="mt-4 pt-3.5 border-t border-white/10 flex items-start gap-2.5 text-xs sm:text-sm text-cyan-300/90 italic font-medium bg-cyan-500/[0.04] p-3 rounded-xl border border-cyan-500/20">
+                  <Quote size={16} className="text-[var(--accent-primary)] flex-shrink-0 mt-0.5" />
+                  <span>{about.philosophy}</span>
+                </div>
+              )}
+
               {/* Mobile Read More Toggle */}
-              <button
-                onClick={() => setIsBioExpanded(!isBioExpanded)}
-                className="sm:hidden self-start inline-flex items-center gap-1 text-xs text-[var(--accent-primary)] font-semibold mt-2 py-1 hover:underline cursor-pointer"
-              >
-                {isBioExpanded ? (
-                  <>
-                    <ChevronUp size={14} /> Show Less Bio
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown size={14} /> Read Full Bio &amp; Background
-                  </>
-                )}
-              </button>
+              {(about.paragraph2 || about.paragraph3) && (
+                <button
+                  onClick={() => setIsBioExpanded(!isBioExpanded)}
+                  className="sm:hidden self-start inline-flex items-center gap-1 text-xs text-[var(--accent-primary)] font-semibold mt-2 py-1 hover:underline cursor-pointer"
+                >
+                  {isBioExpanded ? (
+                    <>
+                      <ChevronUp size={14} /> Show Less Bio
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown size={14} /> Read Full Bio &amp; Background
+                    </>
+                  )}
+                </button>
+              )}
+
+              {/* Dynamic Stats Indicators */}
+              {(about.stats?.yearsExp || about.stats?.projectsCompleted || about.stats?.techMastered) && (
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-5 pt-4 border-t border-white/10 text-center">
+                  <div className="p-2 sm:p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div className="text-base sm:text-xl font-bold font-heading text-white">{about.stats?.yearsExp || '2+'}</div>
+                    <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Experience</div>
+                  </div>
+                  <div className="p-2 sm:p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div className="text-base sm:text-xl font-bold font-heading text-[var(--accent-primary)]">{about.stats?.projectsCompleted || '15+'}</div>
+                    <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Projects</div>
+                  </div>
+                  <div className="p-2 sm:p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div className="text-base sm:text-xl font-bold font-heading text-purple-400">{about.stats?.techMastered || '20+'}</div>
+                    <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Technologies</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

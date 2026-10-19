@@ -4,13 +4,11 @@
  */
 class Cors {
     public static function handle() {
-        // Allowed Origin handling (Localhost, 127.0.0.1, LAN IP 192.168.1.*)
-        $origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
-        $allowed = false;
+        // Allowed Origin handling (Localhost, 127.0.0.1, LAN IP, or any incoming origin in dev)
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-        if ($origin === '*' || preg_match('/^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+)(:\d+)?$/', $origin)) {
-            $allowed = true;
-            header("Access-Control-Allow-Origin: " . ($origin === '*' ? '*' : $origin));
+        if (!empty($origin)) {
+            header("Access-Control-Allow-Origin: " . $origin);
             header("Access-Control-Allow-Credentials: true");
         } else {
             header("Access-Control-Allow-Origin: *");

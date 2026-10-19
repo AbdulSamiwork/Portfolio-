@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main Homepage -->
+  <url>
+    <loc>https://abdulsami.tech/</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/og-preview.png</image:loc>
+      <image:title>Abdul Sami — Full-Stack Web Developer &amp; Machine Learning Specialist</image:title>
+      <image:caption>Official Portfolio of Abdul Sami showcasing Full-Stack Web &amp; AI Engineering Projects</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/abdul_sami_profile.webp</image:loc>
+      <image:title>Abdul Sami Profile Photo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Section Deep Links for Enhanced Crawlability -->
+  <url>
+    <loc>https://abdulsami.tech/#about</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/#skills</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/#projects</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/#experience</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/#certifications</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/#contact</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Featured Project Direct URLs for Search Engine Indexing -->
+  <url>
+    <loc>https://abdulsami.tech/?project=proj-1</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/project_gristmill.webp</image:loc>
+      <image:title>Gristmill Management System</image:title>
+      <image:caption>Decoupled Enterprise Management System with React, Core PHP, and MySQL</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/?project=proj-2</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/project_underpure.webp</image:loc>
+      <image:title>Underpure E-Commerce Platform</image:title>
+      <image:caption>Full-Stack Apparel E-Commerce Web Application with React and Core PHP</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/?project=proj-3</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/project_heart_attack.webp</image:loc>
+      <image:title>Heart Attack Prediction System</image:title>
+      <image:caption>92% Accurate Diagnostic Neural Network built with Python, Scikit-Learn, and Azure AI</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://abdulsami.tech/?project=proj-4</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://abdulsami.tech/images/project_height_prediction.webp</image:loc>
+      <image:title>Height Prediction ML Engine</image:title>
+      <image:caption>Supervised Machine Learning Biometric Regression Pipeline in Python</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

@@ -2,12 +2,15 @@
 /**
  * Unified Database Singleton with PDO Connection Pool
  */
+require_once __DIR__ . '/EnvLoader.php';
+
 class Database {
     private static $instance = null;
     public $conn;
 
     public function __construct() {
         $this->conn = null;
+        EnvLoader::load();
 
         // Auto-detect environment: Localhost vs Live InfinityFree
         $httpHost = $_SERVER['HTTP_HOST'] ?? '';
@@ -15,34 +18,43 @@ class Database {
 
         if ($isLocal) {
             // Local Development (XAMPP)
-            $host = "localhost";
-            $port = "3306";
-            $db_name = "abdul_sami_portfolio";
-            $username = "root";
-            $password = "";
+            $host = EnvLoader::get('DB_HOST_LOCAL', 'localhost');
+            $port = EnvLoader::get('DB_PORT_LOCAL', '3306');
+            $db_name = EnvLoader::get('DB_NAME_LOCAL', 'abdul_sami_portfolio');
+            $username = EnvLoader::get('DB_USER_LOCAL', 'root');
+            $password = EnvLoader::get('DB_PASS_LOCAL', '');
         } else {
             // Live InfinityFree Production
-            $host = "sql200.infinityfree.com";
-            $port = "3306";
-            $db_name = "if0_43031817_abdul_sami";
-            $username = "if0_43031817";
-            $password = "A7T2Zf4okpzh";
+            $host = EnvLoader::get('DB_HOST_LIVE', '');
+            $port = EnvLoader::get('DB_PORT_LIVE', '3306');
+            $db_name = EnvLoader::get('DB_NAME_LIVE', '');
+            $username = EnvLoader::get('DB_USER_LIVE', '');
+            $password = EnvLoader::get('DB_PASS_LIVE', '');
         }
 
-        try {
-            $dsn = "mysql:host={$host};port={$port};dbname={$db_name};charset=utf8mb4";
-            $this->conn = new PDO(
-                $dsn,
-                $username,
-                $password,
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES => false
-                ]
-            );
-        } catch(PDOException $exception) {
-            error_log("Database Connection Error: " . $exception->getMessage());
+        $hosts = [$host];
+        if (!$isLocal && strpos($host, 'infinityfree.com') !== false) {
+            $hosts[] = str_replace('infinityfree.com', 'epizy.com', $host);
+        }
+
+        foreach ($hosts as $h) {
+            try {
+                $dsn = "mysql:host={$h};port={$port};dbname={$db_name};charset=utf8mb4";
+                $this->conn = new PDO(
+                    $dsn,
+                    $username,
+                    $password,
+                    [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES => false,
+                        PDO::ATTR_TIMEOUT => 4
+                    ]
+                );
+                break;
+            } catch(PDOException $exception) {
+                error_log("Database Connection Error on [{$h}]: " . $exception->getMessage());
+            }
         }
     }
 

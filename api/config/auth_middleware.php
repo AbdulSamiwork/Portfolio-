@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/../core/EnvLoader.php';
 
 function verifyAdminAuth() {
     $headers = getallheaders();
@@ -23,7 +24,9 @@ function verifyAdminAuth() {
 
     if (!$db) {
         // Fallback for standalone frontend dev mode without active MySQL database
-        if ($token === 'demo_admin_session_token_12345') {
+        EnvLoader::load();
+        $demoToken = EnvLoader::get('DEMO_SESSION_TOKEN', 'demo_admin_session_token_12345');
+        if ($token === $demoToken) {
             return ["username" => "admin", "role" => "admin"];
         }
         http_response_code(500);

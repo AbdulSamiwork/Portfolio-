@@ -1,0 +1,151 @@
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100000;
+    transform: translateX(-100%);
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-toggle {
+    display: block !important;
+  }
+}
+
+/* Mobile Hardware Acceleration & Smooth 60 FPS Scrolling */
+.glass-panel,
+.glass-card,
+.metric-card-emerald {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  /* Emerald Check Grid Pattern on Mobile */
+  .bg-grid-mesh {
+    background-size: 26px 26px !important;
+    opacity: 0.75 !important;
+    mask-image: radial-gradient(ellipse 100% 90% at 50% 30%, #000 75%, transparent 100%) !important;
+    -webkit-mask-image: radial-gradient(ellipse 100% 90% at 50% 30%, #000 75%, transparent 100%) !important;
+  }
+
+  /* Vibrant Emerald Green Ambient Glow on Mobile */
+  .aurora-orb {
+    display: block !important;
+    filter: blur(55px) !important;
+    opacity: 0.28 !important;
+    animation: none !important; /* static render ensures smooth 60fps scrolling without battery drain */
+  }
+
+  /* Glassmorphism that preserves emerald color and check design visibility */
+  .glass-panel,
+  .glass-card,
+  .metric-card-emerald,
+  .card-animated-emerald,
+  .card-animated-purple,
+  .card-animated-cyan {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(9, 14, 25, 0.82) !important;
+    border: 1px solid rgba(52, 211, 153, 0.18) !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Snappy scroll reveal on mobile */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    transition-duration: 0.35s !important;
+  }
+
+  /* Conic spin animations only on desktop */
+  .metric-card-emerald::after,
+  .card-animated-emerald::after,
+  .card-animated-purple::after,
+  .card-animated-cyan::after {
+    display: none !important;
+  }
+
+  /* Native inertial touch momentum scrolling */
+  html, body {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================
+   Print Optimization: Crystal-Clean Resume Printing
+   ========================================================== */
+@media print {
+  @page {
+    margin: 10mm;
+    size: A4 portrait;
+  }
+
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  /* Completely remove other website layers from print tree so they take 0 pages */
+  .app-container,
+  nav,
+  main,
+  footer,
+  .aurora-orb,
+  .bg-grid-mesh,
+  button,
+  .fixed {
+    display: none !important;
+  }
+
+  /* Isolate and format the resume sheet cleanly on white paper */
+  #printable-resume {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  #printable-resume * {
+    visibility: visible !important;
+  }
+
+  #printable-resume h1,
+  #printable-resume h2,
+  #printable-resume h3,
+  #printable-resume h4,
+  #printable-resume p,
+  #printable-resume span,
+  #printable-resume strong,
+  #printable-resume div {
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+}
+
+/* ==========================================================================
+   High-Level Performance Acceleration (content-visibility & GPU Compositing)
+   ========================================================================== */
+#skills,
+#experience,
+#projects,
+#certifications,
+#testimonials,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 650px;
+}

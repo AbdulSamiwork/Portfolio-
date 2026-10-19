@@ -12,7 +12,7 @@ class ProjectsController {
 
         if ($method === 'POST') {
             if ($db) {
-                $stmt = $db->prepare("INSERT INTO portfolio_projects (title, subtitle, category, category_badge, image, tech_json, summary, highlights_json, github_url) VALUES (:title, :subtitle, :category, :badge, :image, :tech, :summary, :highlights, :github)");
+                $stmt = $db->prepare("INSERT INTO portfolio_projects (title, subtitle, category, category_badge, image, tech_json, summary, highlights_json, github_url, demo_url, show_demo, is_in_progress) VALUES (:title, :subtitle, :category, :badge, :image, :tech, :summary, :highlights, :github, :demo_url, :show_demo, :is_in_progress)");
                 $stmt->execute([
                     ':title' => $data['title'] ?? '',
                     ':subtitle' => $data['subtitle'] ?? '',
@@ -22,7 +22,10 @@ class ProjectsController {
                     ':tech' => json_encode($data['tech'] ?? []),
                     ':summary' => $data['summary'] ?? '',
                     ':highlights' => json_encode($data['highlights'] ?? []),
-                    ':github' => $data['github'] ?? 'https://github.com/Abdul-Sami1122'
+                    ':github' => $data['github'] ?? 'https://github.com/Abdul-Sami1122',
+                    ':demo_url' => $data['demoUrl'] ?? ($data['demo'] ?? 'https://github.com/Abdul-Sami1122'),
+                    ':show_demo' => isset($data['showDemo']) ? ($data['showDemo'] ? 1 : 0) : 1,
+                    ':is_in_progress' => !empty($data['isInProgress']) ? 1 : 0
                 ]);
                 $data['id'] = $db->lastInsertId();
             }
@@ -33,7 +36,8 @@ class ProjectsController {
                 $stmt = $db->prepare("UPDATE portfolio_projects SET 
                     title = :title, subtitle = :subtitle, category = :category, 
                     category_badge = :badge, image = :image, tech_json = :tech, 
-                    summary = :summary, highlights_json = :highlights, github_url = :github 
+                    summary = :summary, highlights_json = :highlights, github_url = :github,
+                    demo_url = :demo_url, show_demo = :show_demo, is_in_progress = :is_in_progress
                     WHERE id = :id");
                 $stmt->execute([
                     ':id' => $id,
@@ -45,7 +49,10 @@ class ProjectsController {
                     ':tech' => json_encode($data['tech'] ?? []),
                     ':summary' => $data['summary'] ?? '',
                     ':highlights' => json_encode($data['highlights'] ?? []),
-                    ':github' => $data['github'] ?? 'https://github.com/Abdul-Sami1122'
+                    ':github' => $data['github'] ?? 'https://github.com/Abdul-Sami1122',
+                    ':demo_url' => $data['demoUrl'] ?? ($data['demo'] ?? 'https://github.com/Abdul-Sami1122'),
+                    ':show_demo' => isset($data['showDemo']) ? ($data['showDemo'] ? 1 : 0) : 1,
+                    ':is_in_progress' => !empty($data['isInProgress']) ? 1 : 0
                 ]);
             }
             Response::success($data, "Project card updated successfully.");

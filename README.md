@@ -11,7 +11,7 @@
 
 **Bridging Full-Stack Software Engineering with Data-Driven Intelligence & Deep Learning.**
 
-[Live Demo](https://abdulsami.infinityfreeapp.com) • [Report Issue](https://github.com/AbdulSamiwork/Portfolio-/issues) • [Contact](mailto:sb850839@gmail.com)
+[Live Demo](https://abdulsami.tech) • [Report Issue](https://github.com/AbdulSamiwork/Portfolio-/issues) • [Contact](mailto:sb850839@gmail.com)
 
 </div>
 
